@@ -4,6 +4,8 @@ Homelab desenvolvido com hardware reaproveitado, visando aprendizado prático em
 
 ## Visão geral
 
+![Visão geral do homelab](imagens/homelab-overview.jpg)
+
 O ambiente é composto por dois servidores físicos — um desktop e um notebook — conectados a um switch Gigabit Ethernet na rede doméstica principal.
 
 A infraestrutura hospeda serviços de DNS, compartilhamento de arquivos, mídia e um servidor Minecraft de uso familiar.
