@@ -14,7 +14,7 @@ O projeto prioriza a reutilização de equipamentos, a redução de custos opera
 
 ## Infraestrutura
 
-![Visão geral da infraestrutura](<imagens/arquitetura geral.jpg>)
+![Visão geral da infraestrutura](<imagens/arquitetura geral.svg>)
 
 ### Servidor principal — Desktop
 
