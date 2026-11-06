@@ -1,6 +1,6 @@
 ## Arquitetura de rede
 
-![Visão geral da arquitetura](<imagens/arquitetura dns.svg>)
+![Visão geral da arquitetura](<../imagens/arquitetura dns.svg>)
 
 Os dois servidores estão conectados à rede principal através de um switch Gigabit Ethernet.
 
