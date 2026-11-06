@@ -22,13 +22,6 @@ O projeto prioriza a reutilização de equipamentos, a redução de custos opera
 
 Hardware parcialmente reaproveitado, incluindo processador e módulos de memória recuperados de descarte eletrônico.
 
-**Serviços:**
-
-- **Samba:** compartilhamento de arquivos na rede local.
-- **Jellyfin:** organização e reprodução do acervo digitalizado de CDs e DVDs.
-- **Pi-hole:** filtragem de consultas DNS.
-- **Unbound:** resolução DNS local.
-
 **Armazenamento:**
 
 - Disco independente para o sistema operacional.
@@ -36,51 +29,10 @@ Hardware parcialmente reaproveitado, incluindo processador e módulos de memóri
 - Pool ZFS denominado `hdd-4tb`.
 - Verificação de integridade por scrub, com último resultado informado sem erros.
 
-### Servidor secundário — Notebook
+### Servidor secundário — Notebook Reaproveitado
 
 **Sistema operacional:** Ubuntu Server.
 
-**Serviços nativos:**
-
-- Pi-hole.
-- Unbound.
-
-**Serviços em Docker Compose:**
-
-- Minecraft Fabric.
-- lazymc, utilizado para iniciar o Minecraft sob demanda.
-
-Os containers utilizam uma rede Docker bridge personalizada, volumes persistentes e configurações declarativas em YAML.
-
-O servidor Minecraft é utilizado exclusivamente na rede doméstica.
-
-## Arquitetura de rede
-
-Os dois servidores estão conectados à rede principal através de um switch Gigabit Ethernet.
-
-O roteador principal distribui os endereços dos dois servidores Pi-hole via DHCP.
-
-Cada Pi-hole possui sua própria instância do Unbound, permitindo resolução DNS independente entre as duas máquinas.
-
-A redundância DNS foi testada na rede principal.
-
-### Sub-rede adicional
-
-A infraestrutura doméstica também possui uma segunda sub-rede, conectada à rede principal por meio da interface WAN de outro roteador.
-
-Esse roteador permite configurar apenas um servidor DNS via DHCP, limitando a redundância automática para seus clientes.
-
-Essa limitação é conhecida e faz parte das características atuais do ambiente.
-
-## Backups automatizados
-
-O servidor Minecraft possui rotinas de sincronização remota executadas por `cron`, utilizando `rsync` sobre SSH.
-
-Os arquivos são transferidos do notebook para o desktop, com destinos separados para cópias semanais e mensais.
-
-O armazenamento de destino utiliza ZFS mirror.
-
-As rotinas de sincronização não substituem um sistema completo de backups versionados, sendo essa uma possibilidade de melhoria futura.
 
 ## Tecnologias utilizadas
 
