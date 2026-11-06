@@ -14,6 +14,8 @@ O projeto prioriza a reutilização de equipamentos, a redução de custos opera
 
 ## Infraestrutura
 
+![Visão geral da infraestrutura]("imagens/arquitetura geral.jpg")
+
 ### Servidor principal — Desktop
 
 **Sistema operacional:** Ubuntu Desktop, com interface gráfica desativada via `systemctl`.
