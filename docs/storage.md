@@ -27,6 +27,8 @@ No homelab, o ZFS foi configurado diretamente pela linha de comando do Linux par
 
 ### Funcionamento
 
+![COW ZFS](<../imagens/cow-zfs.svg>)
+
 O ZFS utiliza um mecanismo chamado **Copy-on-Write (CoW)**. Diferentemente de sistemas que sobrescrevem blocos existentes diretamente, o ZFS grava as alterações em novos blocos e atualiza as referências aos dados após a conclusão da gravação.
 
 Esse mecanismo contribui para a consistência do sistema de arquivos e permite implementar funcionalidades como snapshots.
