@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 680" width="800" height="680" role="img" aria-labelledby="diagramTitle diagramDesc">
+  <title id="diagramTitle">Fluxo de inicialização sob demanda com lazymc</title>
+  <desc id="diagramDesc">Jogador conecta ao lazymc. Se Fabric já estiver ativo, a conexão é encaminhada. Se não, Docker inicia o container, o proxy aguarda a inicialização e então encaminha a conexão para o Fabric.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.4" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#63768b"/>
+    </marker>
+    <style>
+      .body {font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;fill:#192a3b}
+      .head {font-size:19px;font-weight:650}
+      .sub {font-size:14px}
+      .edge {fill:none;stroke:#63768b;stroke-width:2.4;stroke-linejoin:round;marker-end:url(#arrow)}
+      .label {font-size:15px;font-weight:650;fill:#45576d}
+    </style>
+  </defs>
+  <!-- Made deliberately with generous gutters for display in GitHub Markdown. -->
+  <rect x="0" y="0" width="800" height="680" rx="14" fill="#ffffff"/>
+  <!-- Initial connection -->
+  <rect x="286" y="16" width="228" height="56" rx="11" fill="#eff3f8" stroke="#94a3b8" stroke-width="2"/>
+  <text class="body head" x="400" y="39" text-anchor="middle">Jogador Minecraft</text>
+  <text class="body sub" x="400" y="58" text-anchor="middle">Tenta se conectar</text>
+
+  <path class="edge" d="M400 72 V105"/>
+  <rect x="286" y="108" width="228" height="64" rx="11" fill="#e5f7f4" stroke="#0d9488" stroke-width="2"/>
+  <text class="body head" x="400" y="135" text-anchor="middle">lazymc</text>
+  <text class="body sub" x="400" y="157" text-anchor="middle">Proxy TCP · porta 25565</text>
+
+  <path class="edge" d="M400 172 V197"/>
+  <polygon points="400,201 527,263 400,325 273,263" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2.2"/>
+  <text class="body head" x="400" y="256" text-anchor="middle">Fabric está</text>
+  <text class="body head" x="400" y="277" text-anchor="middle">ativo?</text>
+
+  <!-- No path, left -->
+  <path class="edge" d="M273 263 H237"/>
+  <text class="label" x="255" y="247" text-anchor="middle">Não</text>
+  <rect x="24" y="231" width="211" height="64" rx="10" fill="#eff3f8" stroke="#94a3b8" stroke-width="2"/>
+  <text class="body head" x="129.5" y="257" text-anchor="middle">Docker inicia</text>
+  <text class="body sub" x="129.5" y="277" text-anchor="middle">o container Fabric</text>
+
+  <path class="edge" d="M129.5 295 V355"/>
+  <rect x="24" y="360" width="211" height="64" rx="10" fill="#eff3f8" stroke="#94a3b8" stroke-width="2"/>
+  <text class="body head" x="129.5" y="386" text-anchor="middle">lazymc aguarda</text>
+  <text class="body sub" x="129.5" y="406" text-anchor="middle">o servidor ficar pronto</text>
+
+  <!-- Yes path, right -->
+  <path class="edge" d="M527 263 H563"/>
+  <text class="label" x="545" y="247" text-anchor="middle">Sim</text>
+  <rect x="565" y="231" width="211" height="64" rx="10" fill="#eff3f8" stroke="#94a3b8" stroke-width="2"/>
+  <text class="body head" x="670.5" y="257" text-anchor="middle">Fabric pronto</text>
+  <text class="body sub" x="670.5" y="277" text-anchor="middle">para receber jogadores</text>
+
+  <!-- Paths merge at a forwarding step, without touching any nodes -->
+  <path class="edge" d="M129.5 424 V503 H268"/>
+  <path class="edge" d="M670.5 295 V503 H532"/>
+  <rect x="270" y="463" width="260" height="80" rx="12" fill="#e5f7f4" stroke="#0d9488" stroke-width="2.2"/>
+  <text class="body head" x="400" y="497" text-anchor="middle">lazymc encaminha</text>
+  <text class="body head" x="400" y="521" text-anchor="middle">a conexão</text>
+
+  <path class="edge" d="M400 543 V579"/>
+  <rect x="270" y="584" width="260" height="72" rx="12" fill="#eff3f8" stroke="#94a3b8" stroke-width="2"/>
+  <text class="body head" x="400" y="614" text-anchor="middle">Minecraft Fabric</text>
+  <text class="body sub" x="400" y="636" text-anchor="middle">Dados persistentes em /data</text>
+</svg>
