@@ -40,7 +40,6 @@ O serviço utiliza o armazenamento do servidor principal, que possui um pool ZFS
 
 Mais informações sobre o armazenamento estão disponíveis em [Armazenamento ZFS](storage.md).
 
-
 ## Jellyfin
 
 O [Jellyfin](https://jellyfin.org/) é um servidor de mídia de código aberto que permite organizar e reproduzir conteúdos como filmes, séries e músicas, de forma semelhante aos serviços de streaming tradicionais, mas utilizando uma biblioteca de mídia hospedada pelo próprio usuário.
@@ -100,7 +99,6 @@ Essa organização apresenta algumas vantagens:
 - **Flexibilidade:** permite reorganizar a biblioteca de mídia sem mover os arquivos originais.
 - **Manutenção:** facilita a identificação dos arquivos de origem e a administração da biblioteca.
 
-
 ## Minecraft Fabric
 
 O [Fabric](https://fabricmc.net/) é um ecossistema de ferramentas para Minecraft que permite executar modificações no jogo por meio de mods compatíveis.
@@ -109,9 +107,9 @@ O [Fabric](https://fabricmc.net/) é um ecossistema de ferramentas para Minecraf
 
 O servidor Minecraft é hospedado no notebook com Ubuntu Server, utilizando Docker Compose.
 
-A implantação utiliza a imagem `itzg/minecraft-server`.
+A implantação utiliza a imagem `itzg/minecraft-server`, configurada para executar Minecraft com o mod loader Fabric.
 
-O container possui um diretório persistente no host, montado em `/data`, para armazenar os arquivos do servidor e do mundo.
+O container possui um diretório persistente no host, montado em `/data` por meio de um bind mount, para armazenar os arquivos do servidor e do mundo.
 
 O ambiente foi configurado para utilização familiar na rede doméstica.
 
@@ -135,27 +133,31 @@ Essa abordagem permite reduzir o consumo de recursos durante os períodos de ina
 
 No notebook, o lazymc e o Minecraft Fabric são executados em containers definidos no mesmo arquivo Docker Compose.
 
+A implantação utiliza a imagem `ghcr.io/joesturge/lazymc-docker-proxy`, uma implementação que integra o proxy ao Docker para controlar o ciclo de vida do container Minecraft.
+
 Foi configurada uma rede Docker bridge personalizada para permitir a comunicação entre os serviços.
 
 O lazymc recebe as conexões pela porta TCP 25565 e utiliza a integração com o Docker para controlar a inicialização do container Minecraft.
 
 O uso de bind mounts permite armazenar os arquivos do Minecraft diretamente no sistema de arquivos do notebook, preservando-os independentemente da criação ou remoção dos containers.
 
-## Automação e persistência
+## Automação e backups
 
-Os arquivos do Minecraft são armazenados fora do sistema de arquivos temporário do container, por meio de um bind mount.
+O notebook possui uma rotina automatizada de sincronização dos arquivos do servidor Minecraft com o desktop principal.
 
-Além disso, uma rotina agendada com cron utiliza rsync sobre SSH para transferir os dados do notebook ao desktop principal.
+A transferência é realizada utilizando `rsync` sobre SSH, com execução agendada por meio do `cron`.
 
-A configuração e as limitações dessa rotina estão documentadas em [Backups](backups.md).
+Os dados são enviados ao servidor principal, que utiliza armazenamento ZFS em mirror.
+
+A configuração dos agendamentos e as limitações dessa estratégia estão documentadas em [Backups](backups.md).
 
 ## Considerações de segurança
 
-Os serviços foram implantados para atender às necessidades da rede doméstica.
+Os serviços do homelab são destinados ao uso na rede doméstica, sem exposição pública intencional à internet.
 
-Os serviços do homelab são destinados ao uso na rede doméstica, sem exposição pública intencional à internet. Essa restrição reduz a superfície de exposição externa, mas não elimina a necessidade de controlar permissões, atualizar os serviços e revisar as configurações de segurança.
+Essa restrição reduz a superfície de exposição externa, mas não elimina a necessidade de controlar permissões, manter os serviços atualizados e revisar periodicamente suas configurações de segurança.
 
-O ambiente utiliza uma combinação de serviços nativos e containers Docker. A administração e a segurança de cada serviço dependem de suas configurações, permissões e mecanismos de acesso.
+O ambiente utiliza serviços instalados diretamente no Ubuntu e aplicações executadas em containers Docker, cada qual com suas próprias configurações e mecanismos de acesso.
 
 ## Possíveis melhorias
 
@@ -163,4 +165,3 @@ O ambiente utiliza uma combinação de serviços nativos e containers Docker. A 
 - Centralizar a visualização de logs e eventos.
 - Documentar procedimentos de atualização e recuperação.
 - Revisar periodicamente as configurações de segurança e permissões.
-
