@@ -76,7 +76,7 @@ A exclusão ou alteração acidental de arquivos, por exemplo, é refletida no a
 
 O servidor também recebe sincronizações periódicas dos arquivos do servidor Minecraft, utilizando rsync sobre SSH.
 
-A documentação dessas rotinas, incluindo suas limitações e possibilidades de recuperação, está disponível em [Backups automatizados](backups.md).
+A documentação dessas rotinas, incluindo suas limitações e possibilidades de recuperação, está disponível em [Backups](backups.md).
 
 ## Possíveis melhorias
 
