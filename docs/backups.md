@@ -8,7 +8,6 @@ O **notebook com Ubuntu Server** hospeda o Minecraft Fabric em Docker Compose e 
 
 ![Fluxo dos backups do Minecraft](../imagens/fluxo-backups.svg)
 
-*Nota: o diagrama representa os destinos das sincronizações no desktop, mas não afirma em qual sistema de arquivos esses diretórios estão montados.*
 
 ## Ferramentas utilizadas
 
@@ -51,9 +50,12 @@ As opções são utilizadas da seguinte maneira:
 
 A barra `/` ao final do caminho de origem indica que o conteúdo do diretório deve ser sincronizado para o destino.
 
+
 ### Agendamento com cron
 
-O cron executa as duas rotinas separadamente. Abaixo está um **exemplo de configuração**; o horário semanal é ilustrativo e deve ser substituído pelo agendamento efetivamente utilizado no notebook.
+Os comandos são executados automaticamente por meio de agendamentos no cron, com rotinas semanais e mensais.
+
+O exemplo abaixo demonstra a estrutura utilizada, com horários, usuários e caminhos ilustrativos.
 
 ```cron
 # Exemplo: toda segunda-feira às 03:00
@@ -78,9 +80,12 @@ O lazymc permite que o servidor Minecraft permaneça desligado quando não está
 Uma sincronização concluída não garante que o mundo possa ser restaurado corretamente. Testes de restauração ainda são uma melhoria a implementar.
 
 ## Armazenamento dos backups
-Os arquivos são transferidos do notebook para o desktop principal, onde ficam armazenados no pool ZFS hdd-4tb, configurado em mirror com dois HDDs de 4 TB.
 
-Essa configuração oferece redundância contra a falha de um dos discos de armazenamento, mas não substitui backups versionados ou cópias independentes.
+Os arquivos são transferidos do notebook para o desktop principal, onde ficam armazenados no pool ZFS `hdd-4tb`, configurado em mirror com dois HDDs de 4 TB.
+
+O espelhamento oferece tolerância à falha de um dos discos, mas não protege contra exclusões acidentais ou corrupção lógica propagada pelas sincronizações.
+
+Embora as cópias estejam armazenadas em outro equipamento, elas não possuem versionamento completo e permanecem sujeitas aos riscos associados ao servidor de destino.
 
 ## Possíveis melhorias
 
