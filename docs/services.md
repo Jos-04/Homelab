@@ -107,7 +107,7 @@ O [Fabric](https://fabricmc.net/) é um ecossistema de ferramentas para Minecraf
 
 O servidor Minecraft é hospedado no notebook com Ubuntu Server, utilizando Docker Compose.
 
-A implantação utiliza a imagem `itzg/minecraft-server`, configurada para executar Minecraft Fabric com Java 21.
+A implantação utiliza a imagem `itzg/minecraft-server`.
 
 O container possui um diretório persistente no host, montado em `/data`, para armazenar os arquivos do servidor e do mundo.
 
