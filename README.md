@@ -36,17 +36,14 @@ Hardware parcialmente reaproveitado, incluindo processador e módulos de memóri
 
 ## Tecnologias utilizadas
 
-**Sistemas:** Ubuntu Server, Ubuntu Desktop, Linux CLI.
-
-**Redes:** TCP/IP, DHCP, DNS, SSH, Ethernet e roteamento entre sub-redes.
-
-**Serviços:** Pi-hole, Unbound, Samba, Jellyfin.
-
-**Containers:** Docker, Docker Compose, redes bridge, bind mounts.
-
-**Armazenamento:** ZFS mirror.
-
-**Automação:** cron, rsync e SSH.
+| Categoria | Tecnologias |
+|---|---|
+| Sistemas operacionais | Ubuntu Server, Ubuntu Desktop |
+| Redes | TCP/IP, DHCP, DNS, SSH, Ethernet |
+| Serviços | Pi-hole, Unbound, Samba, Jellyfin |
+| Containers | Docker, Docker Compose |
+| Armazenamento | ZFS mirror |
+| Automação | cron, rsync, SSH |
 
 ## Objetivos e aprendizados
 
@@ -67,9 +64,9 @@ Hardware parcialmente reaproveitado, incluindo processador e módulos de memóri
 - Registrar testes de restauração.
 - Expandir a documentação de rede e armazenamento.
 
-## Documentação complementar
+## Documentação técnica
 
-- `docs/network.md` — Topologia e DNS.
-- `docs/storage.md` — Armazenamento ZFS.
-- `docs/services.md` — Serviços hospedados.
-- `docs/backups.md` — Automação e sincronização de dados.
+- [Arquitetura de rede e DNS](docs/network.md)
+- [Armazenamento ZFS](docs/storage.md)
+- [Serviços hospedados](docs/services.md)
+- [Automação de backups](docs/backups.md)
