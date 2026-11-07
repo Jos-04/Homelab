@@ -48,7 +48,7 @@ O último estado verificado do pool `hdd-4tb` apresentou:
 - Pool online.
 - Dois discos online.
 - Nenhum erro de leitura, escrita ou checksum registrado.
-- Último scrub concluído em 11/10/2026, sem erros e sem necessidade de reparos.
+- Último scrub foi concluído sem erros e sem necessidade de reparos.
 
 Essas informações representam o estado observado no momento da consulta, não uma garantia permanente de integridade.
 
@@ -64,7 +64,6 @@ A documentação dessas rotinas, incluindo suas limitações e possibilidades de
 
 ## Possíveis melhorias
 
-- Verificar e documentar a periodicidade dos scrubs.
-- Experimentar snapshots ZFS para manter versões anteriores dos dados.
-- Implementar monitoramento e alertas de falhas nos discos.
-- Documentar procedimentos de substituição de discos e recuperação do pool.
+- **Monitoramento e alertas:** implementar notificações automáticas caso um scrub detecte erros de integridade ou o pool apresente falhas, utilizando mecanismos de monitoramento do ZFS.
+- **Criptografia de dados:** estudar a implementação de criptografia nativa do OpenZFS, avaliando alternativas para proteger os dados existentes sem perda de informações.
+- **Snapshots:** implementar snapshots periódicos para manter versões anteriores dos arquivos e facilitar a recuperação em casos de exclusão ou alteração acidental.
