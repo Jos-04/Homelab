@@ -43,7 +43,7 @@ Mais informações sobre o armazenamento estão disponíveis em [Armazenamento Z
 
 ## Jellyfin
 
-O [Jellyfin](https://jellyfin.org/) é um servidor de mídia de código aberto que permite organizar e reproduzir filmes, séries e músicas por meio de uma interface acessível aos dispositivos da rede.
+O [Jellyfin](https://jellyfin.org/) é um servidor de mídia de código aberto que permite organizar e reproduzir filmes, séries e músicas por meio de uma interface acessível aos dispositivos da rede, de forma semelhante ao Netflix mas com sua própria mídia, não se limitando apenas a filmes, śeries, músicas, etc; mas também pode ser usado para armazenar fotos e vídeos familiares, apesar de não ser muito feature rich para isto.
 
 ### Funcionamento
 
@@ -76,14 +76,14 @@ armazenamento/
 │
 ├── dvds/
 │   ├── filme-exemplo/
-│   └── serie-exemplo/
+│   └── desenho-exemplo/
 │
 └── jellyfin/
     ├── movies/
     │   └── filme-exemplo -> ../../dvds/filme-exemplo
     │
     ├── shows/
-    │   └── serie-exemplo -> ../../dvds/serie-exemplo
+    │   └── serie-exemplo -> ../../dvds/desenho-exemplo
     │
     └── music/
         └── album-exemplo -> ../../cds/album-exemplo
@@ -149,7 +149,7 @@ A configuração e as limitações dessa rotina estão documentadas em [Backups 
 
 Os serviços foram implantados para atender às necessidades da rede doméstica.
 
-O servidor Minecraft é destinado ao uso local, sem exposição pública intencional à internet.
+O servidor Minecraft junto de todos os serviços é destinado ao uso local, sem exposição pública intencional à internet.
 
 O ambiente utiliza uma combinação de serviços nativos e containers Docker. A administração e a segurança de cada serviço dependem de suas configurações, permissões e mecanismos de acesso.
 
