@@ -1,3 +1,4 @@
+
 # Rede e DNS
 
 ## Arquitetura de rede
@@ -6,7 +7,7 @@
 
 Os dois servidores do homelab estão conectados à rede principal por meio de um switch Gigabit Ethernet.
 
-O roteador principal distribui os endereços dos dois servidores Pi-hole via DHCP. Cada Pi-hole utiliza sua própria instância do Unbound, permitindo resolução DNS independente entre as máquinas. A redundância DNS foi testada na rede principal.
+O roteador principal distribui, via DHCP, os endereços dos dois servidores Pi-hole. Cada instância utiliza seu próprio Unbound, permitindo que os dois equipamentos realizem a resolução DNS de maneira independente.
 
 ## Pi-hole
 
@@ -32,16 +33,56 @@ Quando configurado para resolução recursiva, consulta a hierarquia DNS diretam
 
 ### Funcionamento
 
-Quando recebe uma consulta do Pi-hole, o Unbound verifica se há uma resposta válida em seu cache. Se não houver, pode iniciar uma resolução recursiva: consulta servidores raiz, servidores do domínio de topo (TLD) e servidores autoritativos, conforme necessário, até obter a resposta. Respostas podem ser armazenadas em cache de acordo com o TTL.
+Quando recebe uma consulta do Pi-hole, o Unbound verifica se há uma resposta válida em seu cache. Se não houver, pode iniciar uma resolução recursiva: consulta servidores raiz, servidores do domínio de topo (TLD) e servidores autoritativos, conforme necessário, até obter a resposta.
+
+Respostas podem ser armazenadas em cache de acordo com o TTL, evitando repetir consultas enquanto permanecerem válidas.
 
 ![Fluxo de resolução DNS recursiva do Unbound](../imagens/fluxo-unbound.svg)
 
-### Privacidade e segurança
+### Desempenho, privacidade e segurança
 
-O Unbound oferece mecanismos como cache, validação DNSSEC, QNAME minimisation e suporte a DNS-over-TLS (DoT), dependendo da configuração utilizada. **Esses recursos não estão aqui declarados como habilitados no homelab, mas são configurações interessantes para quem queira maximizar sua privacidade ao mesmo tempo que faz self hosting.**
+O Unbound utiliza **cache DNS** para armazenar temporariamente respostas de consultas, respeitando seus respectivos TTLs (*Time To Live*). Isso reduz a necessidade de repetir consultas recursivas e pode diminuir a latência de resolução de domínios frequentemente acessados.
 
-A recursão DNS tradicional não criptografa automaticamente todas as consultas. A QNAME minimisation reduz a informação enviada a diferentes servidores durante a resolução, enquanto DNSSEC pode validar a autenticidade e integridade das respostas de zonas assinadas.
+Além do cache, o Unbound oferece mecanismos como **validação DNSSEC**, **QNAME minimisation** e suporte a **DNS-over-TLS (DoT)**. A disponibilidade e a ativação desses recursos dependem da versão do software e da configuração adotada, considerando os requisitos de privacidade, segurança e desempenho de cada ambiente. Não se afirma aqui que todos estejam habilitados neste homelab.
+
+Esses mecanismos possuem finalidades distintas:
+
+- **DNSSEC:** permite validar a autenticidade e integridade das respostas DNS provenientes de zonas assinadas, ajudando a prevenir ataques de falsificação de respostas.
+- **QNAME minimisation:** reduz a quantidade de informações sobre o domínio solicitado que são enviadas aos diferentes servidores durante a resolução recursiva. Em vez de revelar o nome completo a cada etapa, o resolvedor consulta apenas as informações necessárias naquele estágio.
+- **DNS-over-TLS (DoT):** permite criptografar a comunicação DNS entre componentes compatíveis, protegendo o conteúdo das consultas naquele trecho da conexão. Seu uso não significa que toda a resolução recursiva esteja criptografada.
+
+A resolução recursiva local reduz a dependência de resolvedores DNS públicos, mas **não garante anonimato nem criptografia de ponta a ponta**. Na resolução DNS tradicional, determinadas informações ainda podem ser observadas pelos servidores consultados e por intermediários da rede.
 
 ### Integração com Pi-hole
 
-Cada servidor físico executa sua própria instância de Pi-hole e Unbound. O Pi-hole filtra as consultas; o Unbound resolve as consultas permitidas quando necessário. Essa configuração mantém os dois caminhos de resolução independentes entre os servidores e contribui para a redundância DNS testada na rede principal.
+Cada servidor físico executa sua própria instância de Pi-hole e Unbound. O Pi-hole filtra as consultas; o Unbound resolve as consultas permitidas quando necessário.
+
+Essa configuração mantém os dois caminhos de resolução independentes entre os servidores e contribui para a redundância DNS da rede principal.
+
+## Redundância DNS
+
+O roteador principal permite configurar múltiplos servidores DNS para distribuição aos dispositivos da rede via DHCP.
+
+Essa funcionalidade foi utilizada para fornecer os endereços das duas instâncias de Pi-hole, cada uma executada em um servidor físico diferente e integrada ao seu próprio Unbound.
+
+A arquitetura reduz a dependência de um único servidor para resolução de nomes.
+
+### Testes de disponibilidade
+
+Foram realizados testes de indisponibilidade para verificar a continuidade da resolução DNS na rede principal.
+
+| Cenário testado | Resultado |
+|---|---|
+| Ambos os servidores DNS ativos | Resolução DNS funcionando |
+| Pi-hole do desktop indisponível | Resolução mantida pelo notebook |
+| Pi-hole do notebook indisponível | Resolução mantida pelo desktop |
+
+Os testes demonstraram que a rede principal consegue continuar resolvendo nomes quando uma das instâncias fica indisponível, nas condições avaliadas.
+
+### Limitações da redundância
+
+O comportamento de seleção e alternância entre servidores DNS depende do sistema operacional e da configuração de cada cliente.
+
+Alguns dispositivos podem utilizar os servidores alternadamente, enquanto outros podem recorrer ao servidor alternativo apenas após uma falha ou timeout.
+
+Portanto, a solução oferece **redundância DNS**, mas não garante alta disponibilidade irrestrita para todos os dispositivos da rede.
