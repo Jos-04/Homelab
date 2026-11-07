@@ -1,8 +1,11 @@
+
 # Armazenamento — ZFS
 
 ## Arquitetura de armazenamento
 
 ![Visão geral do armazenamento](<../imagens/overview storage.svg>)
+
+*Nota: os identificadores `sdx` e `sdy` apresentados no diagrama são ilustrativos. Os nomes reais dos dispositivos podem variar conforme a ordem de detecção pelo sistema operacional.*
 
 O servidor principal do homelab utiliza três discos rígidos, organizados de forma a separar o sistema operacional dos dados armazenados.
 
@@ -10,6 +13,7 @@ O servidor principal do homelab utiliza três discos rígidos, organizados de fo
 - **2 HDDs de 4 TB:** utilizados em um pool ZFS configurado em espelhamento (*mirror*).
 
 Essa organização permite manter o armazenamento dos dados independente do disco utilizado pelo sistema operacional.
+
 
 ## ZFS
 
