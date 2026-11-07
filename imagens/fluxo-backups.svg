@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+  <title id="title">Fluxo de sincronização de arquivos do servidor Minecraft</title>
+  <desc id="desc">O notebook com o servidor Minecraft executa um agendamento cron. O rsync transfere arquivos usando SSH para o desktop, mantendo destinos separados para sincronizações semanais e mensais. As cópias não são versionadas.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity=".08"/>
+    </filter>
+  </defs>
+  <rect x="1" y="1" width="1098" height="438" rx="18" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" />
+  <!-- Notebook -->
+  <rect x="30" y="54" width="292" height="169" rx="14" fill="#FFFFFF" stroke="#C4D1DC" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="30" y="54" width="292" height="40" rx="14" fill="#E8F6F3"/>
+  <path d="M30 81 H322" stroke="#D6EAE5" stroke-width="1"/>
+  <text x="176" y="79" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#155E59">Notebook · Ubuntu Server</text>
+  <text x="176" y="123" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" text-anchor="middle" fill="#243447">Minecraft Fabric</text>
+  <text x="176" y="150" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" fill="#475569">Arquivos persistentes no host</text>
+  <rect x="104" y="169" width="144" height="34" rx="17" fill="#E2E8F0"/>
+  <text x="176" y="191" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle" fill="#334155">Agendador cron</text>
+  <!-- transfer -->
+  <path d="M322 136 H409" stroke="#0D9488" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <rect x="420" y="76" width="258" height="122" rx="14" fill="#EAF8F4" stroke="#0D9488" stroke-width="2"/>
+  <text x="549" y="114" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#115E59">rsync</text>
+  <text x="549" y="141" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" text-anchor="middle" fill="#334155">Transferência via SSH</text>
+  <text x="549" y="166" font-family="Inter, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#64748B">Sincronização periódica</text>
+  <path d="M678 136 H768" stroke="#0D9488" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <!-- Desktop -->
+  <rect x="780" y="54" width="288" height="169" rx="14" fill="#FFFFFF" stroke="#C4D1DC" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="780" y="54" width="288" height="40" rx="14" fill="#E8F6F3"/>
+  <path d="M780 81 H1068" stroke="#D6EAE5" stroke-width="1"/>
+  <text x="924" y="79" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#155E59">Desktop · Ubuntu</text>
+  <text x="924" y="124" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" text-anchor="middle" fill="#243447">Recebe as cópias</text>
+  <text x="924" y="150" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" fill="#475569">Diretórios de destino</text>
+  <text x="924" y="182" font-family="Inter, Arial, sans-serif" font-size="13" font-style="italic" text-anchor="middle" fill="#64748B">Sistema de arquivos a confirmar</text>
+  <!-- branch lines -->
+  <path d="M924 223 V254 M823 254 H1025 M823 254 V276 M1025 254 V276" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M823 276 V283 M1025 276 V283" fill="none" stroke="#0D9488" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <!-- Destinations -->
+  <rect x="729" y="294" width="190" height="72" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.7"/>
+  <text x="824" y="322" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#334155" text-anchor="middle">Semanal</text>
+  <text x="824" y="346" font-family="ui-monospace, Consolas, monospace" font-size="16" fill="#0F766E" text-anchor="middle">semana/</text>
+  <rect x="930" y="294" width="138" height="72" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.7"/>
+  <text x="999" y="322" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#334155" text-anchor="middle">Mensal</text>
+  <text x="999" y="346" font-family="ui-monospace, Consolas, monospace" font-size="16" fill="#0F766E" text-anchor="middle">mes/</text>
+  <!-- caution footer -->
+  <rect x="30" y="389" width="1038" height="35" rx="8" fill="#F1F5F9" stroke="#E2E8F0"/>
+  <text x="549" y="411" font-family="Inter, Arial, sans-serif" font-size="15" text-anchor="middle" fill="#475569">Sincronizações independentes: sem histórico completo de versões; --delete pode propagar exclusões.</text>
+</svg>
