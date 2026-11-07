@@ -38,7 +38,7 @@ Quando recebe uma consulta do Pi-hole, o Unbound verifica se há uma resposta v�
 
 ### Privacidade e segurança
 
-O Unbound oferece mecanismos como cache, validação DNSSEC, QNAME minimisation e suporte a DNS-over-TLS (DoT), dependendo da configuração utilizada. **Esses recursos não estão aqui declarados como habilitados no homelab.**
+O Unbound oferece mecanismos como cache, validação DNSSEC, QNAME minimisation e suporte a DNS-over-TLS (DoT), dependendo da configuração utilizada. **Esses recursos não estão aqui declarados como habilitados no homelab, mas são configurações interessantes para quem queira maximizar sua privacidade ao mesmo tempo que faz self hosting.**
 
 A recursão DNS tradicional não criptografa automaticamente todas as consultas. A QNAME minimisation reduz a informação enviada a diferentes servidores durante a resolução, enquanto DNSSEC pode validar a autenticidade e integridade das respostas de zonas assinadas.
 
