@@ -43,7 +43,9 @@ Mais informações sobre o armazenamento estão disponíveis em [Armazenamento Z
 
 ## Jellyfin
 
-O [Jellyfin](https://jellyfin.org/) é um servidor de mídia de código aberto que permite organizar e reproduzir filmes, séries e músicas por meio de uma interface acessível aos dispositivos da rede, de forma semelhante ao Netflix mas com sua própria mídia, não se limitando apenas a filmes, śeries, músicas, etc; mas também pode ser usado para armazenar fotos e vídeos familiares, apesar de não ser muito feature rich para isto.
+O [Jellyfin](https://jellyfin.org/) é um servidor de mídia de código aberto que permite organizar e reproduzir conteúdos como filmes, séries e músicas, de forma semelhante aos serviços de streaming tradicionais, mas utilizando uma biblioteca de mídia hospedada pelo próprio usuário.
+
+Além desses conteúdos, o Jellyfin também permite organizar fotografias e vídeos pessoais, embora seus recursos para gerenciamento desses tipos de mídia sejam mais limitados em comparação com aplicações especializadas.
 
 ### Funcionamento
 
@@ -55,7 +57,7 @@ Durante a reprodução, o conteúdo pode ser transmitido diretamente ao disposit
 
 O Jellyfin está instalado diretamente no Ubuntu do servidor principal.
 
-Sua principal finalidade é disponibilizar uma biblioteca pessoal de CDs e DVDs digitalizados, preservando o conteúdo das mídias físicas contra possíveis problemas de degradação, como *disc rot* (que já era aparente em alguns que possuia).
+Sua principal finalidade é disponibilizar uma biblioteca pessoal de CDs e DVDs digitalizados, preservando o conteúdo das mídias físicas contra possíveis problemas de degradação, como *disc rot*, cujos sinais já eram observáveis em alguns discos do acervo.
 
 Os arquivos são armazenados no pool ZFS mirror do servidor, permitindo o acesso à biblioteca pela rede doméstica.
 
@@ -137,7 +139,7 @@ Foi configurada uma rede Docker bridge personalizada para permitir a comunicaç�
 
 O lazymc recebe as conexões pela porta TCP 25565 e utiliza a integração com o Docker para controlar a inicialização do container Minecraft.
 
-O uso de volumes persistentes permite manter os arquivos do servidor independentemente do ciclo de vida dos containers.
+O uso de bind mounts permite armazenar os arquivos do Minecraft diretamente no sistema de arquivos do notebook, preservando-os independentemente da criação ou remoção dos containers.
 
 ## Automação e persistência
 
@@ -145,13 +147,13 @@ Os arquivos do Minecraft são armazenados fora do sistema de arquivos temporári
 
 Além disso, uma rotina agendada com cron utiliza rsync sobre SSH para transferir os dados do notebook ao desktop principal.
 
-A configuração e as limitações dessa rotina estão documentadas em [Backups automatizados](backups.md).
+A configuração e as limitações dessa rotina estão documentadas em [Backups](backups.md).
 
 ## Considerações de segurança
 
 Os serviços foram implantados para atender às necessidades da rede doméstica.
 
-O servidor Minecraft junto de todos os serviços é destinado ao uso local, sem exposição pública intencional à internet.
+Os serviços do homelab são destinados ao uso na rede doméstica, sem exposição pública intencional à internet. Essa restrição reduz a superfície de exposição externa, mas não elimina a necessidade de controlar permissões, atualizar os serviços e revisar as configurações de segurança.
 
 O ambiente utiliza uma combinação de serviços nativos e containers Docker. A administração e a segurança de cada serviço dependem de suas configurações, permissões e mecanismos de acesso.
 
