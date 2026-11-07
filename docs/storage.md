@@ -3,6 +3,8 @@
 
 ## Arquitetura de armazenamento
 
+O armazenamento é utilizado para manter arquivos compartilhados, uma biblioteca de mídia digitalizada e cópias de segurança de serviços hospedados em outros equipamentos do homelab.
+
 ![Visão geral do armazenamento](<../imagens/overview storage.svg>)
 
 *Nota: os identificadores `sdx` e `sdy` apresentados no diagrama são ilustrativos. Os nomes reais dos dispositivos podem variar conforme a ordem de detecção pelo sistema operacional.*
@@ -23,6 +25,16 @@ Entre seus recursos estão a verificação de integridade por checksums, snapsho
 
 No homelab, o ZFS foi configurado diretamente pela linha de comando do Linux para gerenciar os dois HDDs destinados ao armazenamento.
 
+### Funcionamento
+
+O ZFS utiliza um mecanismo chamado **Copy-on-Write (CoW)**. Diferentemente de sistemas que sobrescrevem blocos existentes diretamente, o ZFS grava as alterações em novos blocos e atualiza as referências aos dados após a conclusão da gravação.
+
+Esse mecanismo contribui para a consistência do sistema de arquivos e permite implementar funcionalidades como snapshots.
+
+Além disso, o ZFS utiliza **checksums** para verificar a integridade dos dados armazenados. Caso detecte uma inconsistência, pode recuperar os dados utilizando uma cópia íntegra disponível em uma configuração redundante, como o mirror utilizado neste homelab.
+
+Outra funcionalidade importante são os **snapshots**, que preservam uma visão do estado de um dataset em determinado momento. Como utilizam Copy-on-Write, inicialmente não precisam duplicar todos os dados armazenados, consumindo espaço adicional conforme os blocos são modificados ou removidos.
+
 ## Espelhamento — ZFS Mirror
 
 O pool `hdd-4tb` utiliza dois discos físicos configurados em mirror.
@@ -41,14 +53,16 @@ Uma das ferramentas de manutenção disponíveis é o **scrub**, procedimento qu
 
 O estado do armazenamento pode ser consultado com:
 
-`zpool status`
+```bash
+zpool status
+```
 
 O último estado verificado do pool `hdd-4tb` apresentou:
 
 - Pool online.
 - Dois discos online.
 - Nenhum erro de leitura, escrita ou checksum registrado.
-- Último scrub foi concluído sem erros e sem necessidade de reparos.
+- O último scrub foi concluído sem erros e sem necessidade de reparos.
 
 Essas informações representam o estado observado no momento da consulta, não uma garantia permanente de integridade.
 
@@ -65,5 +79,5 @@ A documentação dessas rotinas, incluindo suas limitações e possibilidades de
 ## Possíveis melhorias
 
 - **Monitoramento e alertas:** implementar notificações automáticas caso um scrub detecte erros de integridade ou o pool apresente falhas, utilizando mecanismos de monitoramento do ZFS.
-- **Criptografia de dados:** estudar a implementação de criptografia nativa do OpenZFS, avaliando alternativas para proteger os dados existentes sem perda de informações.
+- **Criptografia de dados:** avaliar a migração dos dados para datasets criptografados com OpenZFS, considerando os requisitos de armazenamento, backups e gerenciamento de chaves.
 - **Snapshots:** implementar snapshots periódicos para manter versões anteriores dos arquivos e facilitar a recuperação em casos de exclusão ou alteração acidental.
