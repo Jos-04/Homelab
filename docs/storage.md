@@ -35,7 +35,7 @@ Esse mecanismo contribui para a consistência do sistema de arquivos e permite i
 
 Além disso, o ZFS utiliza **checksums** para verificar a integridade dos dados armazenados. Caso detecte uma inconsistência, pode recuperar os dados utilizando uma cópia íntegra disponível em uma configuração redundante, como o mirror utilizado neste homelab.
 
-Outra funcionalidade importante são os **snapshots**, que preservam uma visão do estado de um dataset em determinado momento. Como utilizam Copy-on-Write, inicialmente não precisam duplicar todos os dados armazenados, consumindo espaço adicional conforme os blocos são modificados ou removidos.
+Outra funcionalidade importante são os **snapshots**, que preservam uma visão do estado de um dataset em determinado momento. Como utilizam Copy-on-Write, inicialmente não exigem a duplicação imediata de todos os dados, passando a consumir espaço adicional à medida que blocos referenciados pelo snapshot são modificados ou removidos.
 
 ## Espelhamento — ZFS Mirror
 
