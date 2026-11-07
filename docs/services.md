@@ -83,7 +83,7 @@ armazenamento/
     │   └── filme-exemplo -> ../../dvds/filme-exemplo
     │
     ├── shows/
-    │   └── serie-exemplo -> ../../dvds/desenho-exemplo
+    │   └── desenho-exemplo -> ../../dvds/desenho-exemplo
     │
     └── music/
         └── album-exemplo -> ../../cds/album-exemplo
@@ -119,13 +119,15 @@ O [lazymc](https://github.com/timvisee/lazymc) é uma ferramenta utilizada para 
 
 ### Funcionamento
 
-O lazymc atua como um proxy que recebe as tentativas de conexão ao servidor Minecraft.
+O lazymc atua como um proxy que recebe tentativas de conexão na porta padrão do Minecraft.
 
-Quando um jogador tenta se conectar e o servidor está inativo, o proxy solicita sua inicialização.
+Quando um jogador tenta se conectar e o servidor Fabric está inativo, o lazymc aciona sua inicialização por meio da integração com o Docker.
 
-Após a inicialização, as conexões são encaminhadas ao servidor Minecraft.
+Após a inicialização do container, as conexões passam a ser encaminhadas ao servidor Minecraft.
 
 Essa abordagem permite reduzir o consumo de recursos durante os períodos de inatividade.
+
+![Fluxo de funcionamento do lazymc](../imagens/fluxo-lazymc.svg)
 
 ### Implementação no homelab
 
