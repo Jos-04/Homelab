@@ -2,7 +2,7 @@
 
 ## Arquitetura de armazenamento
 
-![Visão geral do armazenamento](<../imagens/overview-storage.svg>)
+![Visão geral do armazenamento](../imagens/overview-storage.svg)
 
 O servidor principal do homelab utiliza três discos rígidos, organizados de forma a separar o sistema operacional dos dados armazenados.
 
