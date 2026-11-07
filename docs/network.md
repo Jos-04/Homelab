@@ -18,7 +18,7 @@ A filtragem utiliza **blocklists**: listas de domínios que são incorporadas à
 
 Quando um dispositivo faz uma consulta DNS, o Pi-hole aplica suas regras de filtragem. Se o domínio estiver bloqueado, retorna uma resposta de bloqueio. Caso seja permitido, pode responder com dados válidos em cache; caso contrário, encaminha a consulta ao resolvedor configurado — neste homelab, o Unbound.
 
-![Fluxo de filtragem DNS do Pi-hole](../imagens/pihole.svg)
+![Fluxo de filtragem DNS do Pi-hole](../imagens/fluxo-pihole.svg)
 
 ### Limitações
 
@@ -34,7 +34,7 @@ Quando configurado para resolução recursiva, consulta a hierarquia DNS diretam
 
 Quando recebe uma consulta do Pi-hole, o Unbound verifica se há uma resposta válida em seu cache. Se não houver, pode iniciar uma resolução recursiva: consulta servidores raiz, servidores do domínio de topo (TLD) e servidores autoritativos, conforme necessário, até obter a resposta. Respostas podem ser armazenadas em cache de acordo com o TTL.
 
-![Fluxo de resolução DNS recursiva do Unbound](../imagens/unbound.svg)
+![Fluxo de resolução DNS recursiva do Unbound](../imagens/fluxo-unbound.svg)
 
 ### Privacidade e segurança
 
